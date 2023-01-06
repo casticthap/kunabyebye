@@ -2,7 +2,8 @@
 <head>
   <style>
     fieldset {
-      width: 80%;
+      width: 95%;
+      font-size: 24px;
     }
     input { 
       text-align: right; 
@@ -13,12 +14,14 @@
     label {
       font-size: 48px;
     }
-    img { display:block; }  
+    img { display:block; 
+	flex: 1;
+    }
   </style>
 </head>
   <form>
     <fieldset>
-      <legend>CIJENA: </legend>
+      <legend>CIJENA</legend>
       <input id="ceur" type="number" value=0.00 pattern="[0-9]+([.,][0-9]{1,2})?" min=0 lang="hr" onClick="this.select();">
       <label for="ceur">€</label>
 &nbsp;
@@ -26,7 +29,7 @@
       <label for="chrk">Kn</label>
     </fieldset>
     <fieldset>
-      <legend>UPLATA: </legend>
+      <legend>UPLATA</legend>
       <input id="ueur" type="number" value=0.00 pattern="[0-9]+(\.[0-9]{1,2})?" min=0 onClick="this.select();">
       <label for="ueur">€</label>
 &nbsp;
@@ -56,7 +59,7 @@
       </div>
     </fieldset>
     <fieldset>
-      <legend>POVRAT: </legend>
+      <legend>POVRAT</legend>
       <input id="peur" type="number" value=0.00 readonly>
       <label for="peur">€</label>
 &nbsp;
@@ -114,3 +117,4 @@
 
   </script>
 </html>
+
