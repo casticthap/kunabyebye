@@ -125,8 +125,8 @@
 	function updatePHrk() { diff('#uhrk','#chrk','#phrk'); }
 	function diff(uid, cid, pid) {
 		let num = document.querySelector(uid).value - document.querySelector(cid).value;
-		num = num.toFixed(2);
 		if (num < 0) num = 0;
+		num = num.toFixed(2);
 		document.querySelector(pid).value = num;
 	}
 
