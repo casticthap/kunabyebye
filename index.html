@@ -17,6 +17,10 @@
 			font-size: 64px;
 			border-radius: 11px;
 		}
+		input[type="number"]:disabled {
+			background-color: white;
+			color: black;
+		}
 		label { font-size: 64px; }
 		img.kovanica {
 			border-radius: 50%;
@@ -80,10 +84,10 @@
 	</div>
 	<fieldset>
 		<legend>POVRAT</legend>
-		<input id="peur" type="number" value=0.00 readonly>
+		<input id="peur" type="number" value=0.00 disabled>
 		<label for="peur">€</label>
 		&nbsp;
-		<input id="phrk" type="number" value=0.00 readonly>
+		<input id="phrk" type="number" value=0.00 disabled>
 		<label for="phrk">Kn</label>
 	</fieldset>
 </span>
