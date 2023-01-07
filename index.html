@@ -6,13 +6,13 @@
 			font-family: Söhne,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Arial
 		}
 		fieldset {
-			display: flex;
+			display: flex-wrap;
 			flex-direction: row;
 			border-radius: 11px;
 			font-size: 24px;
 		}
 		input {
-			width: 100%;
+			width: 41%;
 			border-width: 1px;
 			text-align: right;
 			font-size: 64px;
@@ -63,26 +63,30 @@
 		&nbsp;
 		<input id="uhrk" type="number" value=0.00 pattern="[0-9]+(\.[0-9]{1,2})?" min=0 onClick="this.select();">
 		<label for="uhrk">Kn</label>
+		<div>
+			<hr/>
+			<span>ili unesi klikom na ikone:</span>
+			<div>
+				<img src="images/hrk100.png" class="kovanica" onclick="javascript:add(1)"/>
+				<img src="images/hrk200.png" class="kovanica" onclick="javascript:add(2)"/>
+				<img src="images/hrk500.png" class="kovanica" onclick="javascript:add(5)"/>
+				<img src="images/hrk1000.png" class="novcanica" onclick="javascript:add(10)"/>
+				<img src="images/hrk2000.png" class="novcanica" onclick="javascript:add(20)"/>
+				<img src="images/hrk5000.png" class="novcanica" onclick="javascript:add(50)"/>
+				<img src="images/hrk10000.png" class="novcanica" onclick="javascript:add(100)"/>
+				<img src="images/hrk20000.png" class="novcanica" onclick="javascript:add(200)"/>
+			</div>
+			<div>
+				<img src="images/hrk1.png" class="kovanica" onclick="javascript:add(0.01)"/>
+				<img src="images/hrk2.png" class="kovanica" onclick="javascript:add(0.02)"/>
+				<img src="images/hrk5.png" class="kovanica" onclick="javascript:add(0.05)"/>
+				<img src="images/hrk10.png" class="kovanica" onclick="javascript:add(0.10)"/>
+				<img src="images/hrk20.png" class="kovanica" onclick="javascript:add(0.20)"/>
+				<img src="images/hrk50.png" class="kovanica" onclick="javascript:add(0.50)"/>
+				<div class="ponisti" onclick="javascript:setUplataHrk(0.00)">PONIŠTI UPLATU</div>
+			</div>
+		</div>
 	</fieldset>
-	<div>
-		<img src="images/hrk100.png" class="kovanica" onclick="javascript:add(1)"/>
-		<img src="images/hrk200.png" class="kovanica" onclick="javascript:add(2)"/>
-		<img src="images/hrk500.png" class="kovanica" onclick="javascript:add(5)"/>
-		<img src="images/hrk1000.png" class="novcanica" onclick="javascript:add(10)"/>
-		<img src="images/hrk2000.png" class="novcanica" onclick="javascript:add(20)"/>
-		<img src="images/hrk5000.png" class="novcanica" onclick="javascript:add(50)"/>
-		<img src="images/hrk10000.png" class="novcanica" onclick="javascript:add(100)"/>
-		<img src="images/hrk20000.png" class="novcanica" onclick="javascript:add(200)"/>
-	</div>
-	<div>
-		<img src="images/hrk1.png" class="kovanica" onclick="javascript:add(0.01)"/>
-		<img src="images/hrk2.png" class="kovanica" onclick="javascript:add(0.02)"/>
-		<img src="images/hrk5.png" class="kovanica" onclick="javascript:add(0.05)"/>
-		<img src="images/hrk10.png" class="kovanica" onclick="javascript:add(0.10)"/>
-		<img src="images/hrk20.png" class="kovanica" onclick="javascript:add(0.20)"/>
-		<img src="images/hrk50.png" class="kovanica" onclick="javascript:add(0.50)"/>
-		<div class="ponisti" onclick="javascript:setUplataHrk(0.00)">PONIŠTI UPLATU</div>
-	</div>
 	<fieldset>
 		<legend>POVRAT</legend>
 		<input id="peur" type="number" value=0.00 disabled>
