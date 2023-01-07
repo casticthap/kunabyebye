@@ -1,120 +1,143 @@
 <html lang="en-150">
 <head>
-  <style>
-    fieldset {
-      width: 95%;
-      font-size: 24px;
-    }
-    input { 
-      text-align: right; 
-      flex: 1;
-      width: 36%;
-      font-size: 48px;
-    }
-    label {
-      font-size: 48px;
-    }
-    img { display:block; 
-	flex: 1;
-    }
-  </style>
+	<style>
+		body {
+			font-family: Söhne,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Arial
+		}
+		fieldset {
+			display: flex;
+			flex-direction: row;
+			border-radius: 11px;
+		}
+		input {
+			width: 100%;
+			border-width: 1px;
+			text-align: right;
+			font-size: 48px;
+			border-radius: 11px;
+		}
+		label { font-size: 48px; }
+		img.kovanica {
+			border-radius: 50%;
+			border:        0px solid #556699;
+			box-shadow:    2px 2px #818589;
+		}
+		img.novcanica {
+			border:        1px solid #C1E1C1;
+			box-shadow:    2px 2px #D3D3D3;
+		}
+		.ponisti {
+			background:    #ff0000;
+			background:    linear-gradient(#ff0000, #ea9999);
+			border:        1px solid #556699;
+			border-radius: 11px;
+			box-shadow:    2px 2px #444444;
+			padding:       20px 45px;
+			color:         #ffffff;
+			display:       inline-block;
+			font:          normal bold 26px/1 "Open Sans", sans-serif;
+			text-align:    center;
+			max-height: 50%;
+			align-self: top;
+			vertical-align: top;
+		}
+	</style>
 </head>
-  <form>
-    <fieldset>
-      <legend>CIJENA</legend>
-      <input id="ceur" type="number" value=0.00 pattern="[0-9]+([.,][0-9]{1,2})?" min=0 lang="hr" onClick="this.select();">
-      <label for="ceur">€</label>
-&nbsp;
-      <input id="chrk" type="number" value=0.00 pattern="[0-9]+([.,][0-9]{1,2})?" min=0 lang="eng-150" onClick="this.select();">
-      <label for="chrk">Kn</label>
-    </fieldset>
-    <fieldset>
-      <legend>UPLATA</legend>
-      <input id="ueur" type="number" value=0.00 pattern="[0-9]+(\.[0-9]{1,2})?" min=0 onClick="this.select();">
-      <label for="ueur">€</label>
-&nbsp;
-      <input id="uhrk" type="number" value=0.00 pattern="[0-9]+(\.[0-9]{1,2})?" min=0 onClick="this.select();">
-      <label for="uhrk">Kn</label>
-<BR CLEAR=ALL />
-      <div class="kune">
-      <img src="images/hrk.png" usemap="#image-map"/>
+<form>
+	<fieldset>
+		<legend>CIJENA</legend>
+		<input id="ceur" type="number" value=0.00 pattern="[0-9]+([.,][0-9]{1,2})?" min=0 lang="hr" onClick="this.select();">
+		<label for="ceur">€</label>
+		&nbsp;
+		<input id="chrk" type="number" value=0.00 pattern="[0-9]+([.,][0-9]{1,2})?" min=0 lang="eng-150" onClick="this.select();">
+		<label for="chrk">Kn</label>
+	</fieldset>
+	<fieldset>
+		<legend>UPLATA</legend>
+		<input id="ueur" type="number" value=0.00 pattern="[0-9]+(\.[0-9]{1,2})?" min=0 onClick="this.select();">
+		<label for="ueur">€</label>
+		&nbsp;
+		<input id="uhrk" type="number" value=0.00 pattern="[0-9]+(\.[0-9]{1,2})?" min=0 onClick="this.select();">
+		<label for="uhrk">Kn</label>
+	</fieldset>
+	<div>
+		<img src="images/hrk100.png" class="kovanica" onclick="javascript:add(1)"/>
+		<img src="images/hrk200.png" class="kovanica" onclick="javascript:add(2)"/>
+		<img src="images/hrk500.png" class="kovanica" onclick="javascript:add(5)"/>
+		<img src="images/hrk1000.png" class="novcanica" onclick="javascript:add(10)"/>
+		<img src="images/hrk2000.png" class="novcanica" onclick="javascript:add(20)"/>
+		<img src="images/hrk5000.png" class="novcanica" onclick="javascript:add(50)"/>
+		<img src="images/hrk10000.png" class="novcanica" onclick="javascript:add(100)"/>
+		<img src="images/hrk20000.png" class="novcanica" onclick="javascript:add(200)"/>
+	</div>
+	<div>
+		<img src="images/hrk1.png" class="kovanica" onclick="javascript:add(0.01)"/>
+		<img src="images/hrk2.png" class="kovanica" onclick="javascript:add(0.02)"/>
+		<img src="images/hrk5.png" class="kovanica" onclick="javascript:add(0.05)"/>
+		<img src="images/hrk10.png" class="kovanica" onclick="javascript:add(0.10)"/>
+		<img src="images/hrk20.png" class="kovanica" onclick="javascript:add(0.20)"/>
+		<img src="images/hrk50.png" class="kovanica" onclick="javascript:add(0.50)"/>
+		<div class="ponisti" onclick="javascript:setUplataHrk(0.00)">PONIŠTI UPLATU</div>
+	</div>
+	<fieldset>
+		<legend>POVRAT</legend>
+		<input id="peur" type="number" value=0.00 readonly>
+		<label for="peur">€</label>
+		&nbsp;
+		<input id="phrk" type="number" value=0.00 readonly>
+		<label for="phrk">Kn</label>
+	</fieldset>
+</span>
 
-      <map name="image-map">
-        <area target="_self" alt="1Kn" title="1Kn" href="javascript:add(1)" coords="27,40,24" shape="circle">
-        <area target="_self" alt="2Kn" title="2Kn" href="javascript:add(2)" coords="85,39,26" shape="circle">
-        <area target="_self" alt="5Kn" title="5Kn" href="javascript:add(5)" coords="147,36,30" shape="circle">
-        <area target="_self" alt="10Kn" title="10Kn" href="javascript:add(10)" coords="189,4,267,66" shape="rect">
-        <area target="_self" alt="20Kn" title="20Kn" href="javascript:add(20)" coords="283,4,359,66" shape="rect">
-        <area target="_self" alt="50Kn" title="50Kn" href="javascript:add(50)" coords="374,3,451,67" shape="rect">
-        <area target="_self" alt="100Kn" title="100Kn" href="javascript:add(100)" coords="465,3,544,67" shape="rect">
-        <area target="_self" alt="200Kn" title="200Kn" href="javascript:add(200)" coords="557,3,639,67" shape="rect">
-        <area target="_self" alt="1lp" title="1lp" href="javascript:add(0.01)" coords="28,106,19" shape="circle">
-        <area target="_self" alt="2lp" title="2lp" href="javascript:add(0.02)" coords="86,104,21" shape="circle">
-        <area target="_self" alt="5lp" title="5lp" href="javascript:add(0.05)" coords="146,105,21" shape="circle">
-        <area target="_self" alt="10lp" title="10lp" href="javascript:add(0.10)" coords="224,101,23" shape="circle">
-        <area target="_self" alt="20lp" title="20lp" href="javascript:add(0.20)" coords="319,104,21" shape="circle">
-        <area target="_self" alt="50lp" title="50lp" href="javascript:add(0.50)" coords="414,102,23" shape="circle">
-        <area target="_self" alt="RESET" title="PONIŠTI" href="javascript:setUplataHrk(0.00)" coords="602,124,497,84" shape="rect">
-      </map>
-      </div>
-    </fieldset>
-    <fieldset>
-      <legend>POVRAT</legend>
-      <input id="peur" type="number" value=0.00 readonly>
-      <label for="peur">€</label>
-&nbsp;
-      <input id="phrk" type="number" value=0.00 readonly>
-      <label for="phrk">Kn</label>
-    </fieldset>
-  </form>
-  <script>
-    document.querySelector('#chrk').addEventListener('input', e => hrk2eur(e, '#ceur'));
-    document.querySelector('#ceur').addEventListener('input', e => eur2hrk(e, '#chrk'));
-    document.querySelector('#chrk').addEventListener('input', updatePovrat);
-    document.querySelector('#ceur').addEventListener('input', updatePovrat);
+</form>
+<script>
+	document.querySelector('#chrk').addEventListener('input', e => hrk2eur(e, '#ceur'));
+	document.querySelector('#ceur').addEventListener('input', e => eur2hrk(e, '#chrk'));
+	document.querySelector('#chrk').addEventListener('input', updatePovrat);
+	document.querySelector('#ceur').addEventListener('input', updatePovrat);
 
-    document.querySelector('#uhrk').addEventListener('input', e => hrk2eur(e, '#ueur'));
-    document.querySelector('#ueur').addEventListener('input', e => eur2hrk(e, '#uhrk'));
-    document.querySelector('#uhrk').addEventListener('input', updatePovrat);
-    document.querySelector('#ueur').addEventListener('input', updatePovrat);
+	document.querySelector('#uhrk').addEventListener('input', e => hrk2eur(e, '#ueur'));
+	document.querySelector('#ueur').addEventListener('input', e => eur2hrk(e, '#uhrk'));
+	document.querySelector('#uhrk').addEventListener('input', updatePovrat);
+	document.querySelector('#ueur').addEventListener('input', updatePovrat);
 
-    document.querySelector('#phrk').addEventListener('input', e => hrk2eur(e, '#peur'));
-    document.querySelector('#peur').addEventListener('input', e => eur2hrk(e, '#phrk'));
+	document.querySelector('#phrk').addEventListener('input', e => hrk2eur(e, '#peur'));
+	document.querySelector('#peur').addEventListener('input', e => eur2hrk(e, '#phrk'));
 
-    function xchange(element, selector, rate) {
-        let num = element.target.value * rate;
-        num = num.toFixed(2);
-        document.querySelector(selector).value = num;
-    }
+	function xchange(element, selector, rate) {
+		let num = element.target.value * rate;
+		num = num.toFixed(2);
+		document.querySelector(selector).value = num;
+	}
 
-    let rate = 7.53450
-    function eur2hrk(element, selector) { xchange(element, selector, rate); }
-    function hrk2eur(element, selector) { xchange(element, selector, (1/rate)); }
+	let rate = 7.53450
+	function eur2hrk(element, selector) { xchange(element, selector, rate); }
+	function hrk2eur(element, selector) { xchange(element, selector, (1/rate)); }
 
-    function updatePovrat() {
-        updatePEur();
-        updatePHrk();
-    }
-    function updatePEur() { diff('#ueur','#ceur','#peur'); }
-    function updatePHrk() { diff('#uhrk','#chrk','#phrk'); }
-    function diff(uid, cid, pid) {
-	let num = document.querySelector(uid).value - document.querySelector(cid).value;
-        num = num.toFixed(2);
-	if (num < 0) num = 0;
-        document.querySelector(pid).value = num;
-    }
+	function updatePovrat() {
+		updatePEur();
+		updatePHrk();
+	}
+	function updatePEur() { diff('#ueur','#ceur','#peur'); }
+	function updatePHrk() { diff('#uhrk','#chrk','#phrk'); }
+	function diff(uid, cid, pid) {
+		let num = document.querySelector(uid).value - document.querySelector(cid).value;
+		num = num.toFixed(2);
+		if (num < 0) num = 0;
+		document.querySelector(pid).value = num;
+	}
 
-    function add(value) {
-        setUplataHrk(parseFloat(document.querySelector('#uhrk').value) + parseFloat(value));
-    }
+	function add(value) {
+		setUplataHrk(parseFloat(document.querySelector('#uhrk').value) + parseFloat(value));
+	}
 
-    function setUplataHrk(value) {
-	let element = document.querySelector('#uhrk');
-        element.value = value.toFixed(2);
-        element.dispatchEvent(new Event('input', {bubbles:true}));
-        updatePovrat();
-    }
+	function setUplataHrk(value) {
+		let element = document.querySelector('#uhrk');
+		element.value = value.toFixed(2);
+		element.dispatchEvent(new Event('input', {bubbles:true}));
+		updatePovrat();
+	}
 
-  </script>
+</script>
 </html>
 
