@@ -67,55 +67,55 @@
 </head>
 
 <body>
-<form>
-	<fieldset>
-		<legend>CIJENA</legend>
-		<input id="ceur" type="number" inputmode="decimal" min=0 value=0.00>
-		<label for="ceur">€</label>
-		&nbsp;
-		<input id="chrk" type="number" inputmode="decimal" min=0 value=0.00>
-		<label for="chrk">Kn</label>
-	</fieldset>
-	<fieldset>
-		<legend>UPLATA</legend>
-		<input id="ueur" type="number" inputmode="decimal" min=0 value=0.00>
-		<label for="ueur">€</label>
-		&nbsp;
-		<input id="uhrk" type="number" inputmode="decimal" min=0 value=0.00>
-		<label for="uhrk">Kn</label>
-		<div>
-			<hr/>
-			<span>ili dodaj klikom na ikone:</span>
+	<form>
+		<fieldset>
+			<legend>CIJENA</legend>
+			<input id="ceur" type="number" inputmode="decimal" min=0 value=0.00>
+			<label for="ceur">€</label>
+			&nbsp;
+			<input id="chrk" type="number" inputmode="decimal" min=0 value=0.00>
+			<label for="chrk">Kn</label>
+		</fieldset>
+		<fieldset>
+			<legend>UPLATA</legend>
+			<input id="ueur" type="number" inputmode="decimal" min=0 value=0.00>
+			<label for="ueur">€</label>
+			&nbsp;
+			<input id="uhrk" type="number" inputmode="decimal" min=0 value=0.00>
+			<label for="uhrk">Kn</label>
 			<div>
-				<img src="images/hrk100.png" class="kovanica" onclick="javascript:add(1)"/>
-				<img src="images/hrk200.png" class="kovanica" onclick="javascript:add(2)"/>
-				<img src="images/hrk500.png" class="kovanica" onclick="javascript:add(5)"/>
-				<img src="images/hrk1000.png" class="novcanica" onclick="javascript:add(10)"/>
-				<img src="images/hrk2000.png" class="novcanica" onclick="javascript:add(20)"/>
-				<img src="images/hrk5000.png" class="novcanica" onclick="javascript:add(50)"/>
-				<img src="images/hrk10000.png" class="novcanica" onclick="javascript:add(100)"/>
-				<img src="images/hrk20000.png" class="novcanica" onclick="javascript:add(200)"/>
+				<hr/>
+				<span>ili dodaj klikom na ikone:</span>
+				<div>
+					<img src="images/hrk100.png" class="kovanica" onclick="javascript:add(1)"/>
+					<img src="images/hrk200.png" class="kovanica" onclick="javascript:add(2)"/>
+					<img src="images/hrk500.png" class="kovanica" onclick="javascript:add(5)"/>
+					<img src="images/hrk1000.png" class="novcanica" onclick="javascript:add(10)"/>
+					<img src="images/hrk2000.png" class="novcanica" onclick="javascript:add(20)"/>
+					<img src="images/hrk5000.png" class="novcanica" onclick="javascript:add(50)"/>
+					<img src="images/hrk10000.png" class="novcanica" onclick="javascript:add(100)"/>
+					<img src="images/hrk20000.png" class="novcanica" onclick="javascript:add(200)"/>
+				</div>
+				<div>
+					<img src="images/hrk1.png" class="kovanica" onclick="javascript:add(0.01)"/>
+					<img src="images/hrk2.png" class="kovanica" onclick="javascript:add(0.02)"/>
+					<img src="images/hrk5.png" class="kovanica" onclick="javascript:add(0.05)"/>
+					<img src="images/hrk10.png" class="kovanica" onclick="javascript:add(0.10)"/>
+					<img src="images/hrk20.png" class="kovanica" onclick="javascript:add(0.20)"/>
+					<img src="images/hrk50.png" class="kovanica" onclick="javascript:add(0.50)"/>
+					<div class="ponisti" onclick="javascript:setUplataHrk(0.00);">PONIŠTI UPLATU</div>
+				</div>
 			</div>
-			<div>
-				<img src="images/hrk1.png" class="kovanica" onclick="javascript:add(0.01)"/>
-				<img src="images/hrk2.png" class="kovanica" onclick="javascript:add(0.02)"/>
-				<img src="images/hrk5.png" class="kovanica" onclick="javascript:add(0.05)"/>
-				<img src="images/hrk10.png" class="kovanica" onclick="javascript:add(0.10)"/>
-				<img src="images/hrk20.png" class="kovanica" onclick="javascript:add(0.20)"/>
-				<img src="images/hrk50.png" class="kovanica" onclick="javascript:add(0.50)"/>
-				<div class="ponisti" onclick="javascript:setUplataHrk(0.00);">PONIŠTI UPLATU</div>
-			</div>
-		</div>
-	</fieldset>
-	<fieldset>
-		<legend>POVRAT</legend>
-		<input id="peur" type="number" value=0.00 disabled>
-		<label for="peur">€</label>
-		&nbsp;
-		<input id="phrk" type="number" value=0.00 disabled>
-		<label for="phrk">Kn</label>
-	</fieldset>
-</span>
+		</fieldset>
+		<fieldset>
+			<legend>POVRAT</legend>
+			<input id="peur" type="number" value=0.00 disabled>
+			<label for="peur">€</label>
+			&nbsp;
+			<input id="phrk" type="number" value=0.00 disabled>
+			<label for="phrk">Kn</label>
+		</fieldset>
+	</span>
 </form>
 </body>
 
