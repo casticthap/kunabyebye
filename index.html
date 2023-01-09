@@ -1,4 +1,5 @@
 <html lang="en-150">
+
 <head>
 	<meta name="viewport" content="user-scalable=no">
 	<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon.png">
@@ -63,21 +64,23 @@
 		}
 	</style>
 </head>
+
+<body>
 <form>
 	<fieldset>
 		<legend>CIJENA</legend>
-		<input id="ceur" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();">
+		<input id="ceur" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();" onFocus="this.select();">
 		<label for="ceur">€</label>
 		&nbsp;
-		<input id="chrk" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();">
+		<input id="chrk" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();" onFocus="this.select();">
 		<label for="chrk">Kn</label>
 	</fieldset>
 	<fieldset>
 		<legend>UPLATA</legend>
-		<input id="ueur" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();">
+		<input id="ueur" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();" onFocus="this.select();">
 		<label for="ueur">€</label>
 		&nbsp;
-		<input id="uhrk" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();">
+		<input id="uhrk" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();" onFocus="this.select();">
 		<label for="uhrk">Kn</label>
 		<div>
 			<hr/>
@@ -99,7 +102,7 @@
 				<img src="images/hrk10.png" class="kovanica" onclick="javascript:add(0.10)"/>
 				<img src="images/hrk20.png" class="kovanica" onclick="javascript:add(0.20)"/>
 				<img src="images/hrk50.png" class="kovanica" onclick="javascript:add(0.50)"/>
-				<div class="ponisti" onclick="javascript:resetUplata()">PONIŠTI UPLATU</div>
+				<div class="ponisti" onclick="javascript:setUplataHrk(0.00);">PONIŠTI UPLATU</div>
 			</div>
 		</div>
 	</fieldset>
@@ -113,6 +116,8 @@
 	</fieldset>
 </span>
 </form>
+</body>
+
 <script>
 	document.querySelector('#chrk').addEventListener('input', e => hrk2eur(e, '#ceur'));
 	document.querySelector('#ceur').addEventListener('input', e => eur2hrk(e, '#chrk'));
@@ -162,14 +167,6 @@
 		element.dispatchEvent(new Event('input', {bubbles:true}));
 		element.focus();
 		updatePovrat();
-	}
-
-	function resetUplata() {
-		setUplataHrk(0.00);
-		const inputs = document.querySelectorAll('input');
-		for (const each of inputs) {
-			each.blur();
-		}
 	}
 
 </script>
