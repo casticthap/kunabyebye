@@ -26,10 +26,17 @@
 			text-align: right;
 			font-size: 64px;
 			border-radius: 11px;
+			caret-color: transparent;
 		}
-		input[type="number"]:disabled {
+		input:disabled {
 			background-color: white;
 			color: black;
+		}
+		input:focus {
+			background-color: #E9FFC9;
+		}
+		input::selection {
+			background-color: #C9E9FF;
 		}
 		label { font-size: 64px; }
 		img.kovanica {
@@ -59,18 +66,18 @@
 <form>
 	<fieldset>
 		<legend>CIJENA</legend>
-		<input id="ceur" type="number" value=0.00 pattern="[0-9]+([.,][0-9]{1,2})?" min=0 lang="hr" onClick="this.select();">
+		<input id="ceur" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();">
 		<label for="ceur">€</label>
 		&nbsp;
-		<input id="chrk" type="number" value=0.00 pattern="[0-9]+([.,][0-9]{1,2})?" min=0 lang="eng-150" onClick="this.select();">
+		<input id="chrk" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();">
 		<label for="chrk">Kn</label>
 	</fieldset>
 	<fieldset>
 		<legend>UPLATA</legend>
-		<input id="ueur" type="number" value=0.00 pattern="[0-9]+(\.[0-9]{1,2})?" min=0 onClick="this.select();">
+		<input id="ueur" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();">
 		<label for="ueur">€</label>
 		&nbsp;
-		<input id="uhrk" type="number" value=0.00 pattern="[0-9]+(\.[0-9]{1,2})?" min=0 onClick="this.select();">
+		<input id="uhrk" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();">
 		<label for="uhrk">Kn</label>
 		<div>
 			<hr/>
@@ -92,7 +99,7 @@
 				<img src="images/hrk10.png" class="kovanica" onclick="javascript:add(0.10)"/>
 				<img src="images/hrk20.png" class="kovanica" onclick="javascript:add(0.20)"/>
 				<img src="images/hrk50.png" class="kovanica" onclick="javascript:add(0.50)"/>
-				<div class="ponisti" onclick="javascript:setUplataHrk(0.00)">PONIŠTI UPLATU</div>
+				<div class="ponisti" onclick="javascript:resetUplata()">PONIŠTI UPLATU</div>
 			</div>
 		</div>
 	</fieldset>
@@ -105,7 +112,6 @@
 		<label for="phrk">Kn</label>
 	</fieldset>
 </span>
-
 </form>
 <script>
 	document.querySelector('#chrk').addEventListener('input', e => hrk2eur(e, '#ceur'));
@@ -121,13 +127,15 @@
 	document.querySelector('#phrk').addEventListener('input', e => hrk2eur(e, '#peur'));
 	document.querySelector('#peur').addEventListener('input', e => eur2hrk(e, '#phrk'));
 
+	let rate = 7.53450
+
 	function xchange(element, selector, rate) {
+		element.target.value.replace(',', '.');
 		let num = element.target.value * rate;
 		num = num.toFixed(2);
 		document.querySelector(selector).value = num;
 	}
 
-	let rate = 7.53450
 	function eur2hrk(element, selector) { xchange(element, selector, rate); }
 	function hrk2eur(element, selector) { xchange(element, selector, (1/rate)); }
 
@@ -152,7 +160,16 @@
 		let element = document.querySelector('#uhrk');
 		element.value = value.toFixed(2);
 		element.dispatchEvent(new Event('input', {bubbles:true}));
+		element.focus();
 		updatePovrat();
+	}
+
+	function resetUplata() {
+		setUplataHrk(0.00);
+		const inputs = document.querySelectorAll('input');
+		for (const each of inputs) {
+			each.blur();
+		}
 	}
 
 </script>
