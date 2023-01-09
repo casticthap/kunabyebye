@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en-150">
 
 <head>
@@ -69,18 +70,18 @@
 <form>
 	<fieldset>
 		<legend>CIJENA</legend>
-		<input id="ceur" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();" onFocus="this.select();">
+		<input id="ceur" type="number" inputmode="decimal" min=0 value=0.00>
 		<label for="ceur">€</label>
 		&nbsp;
-		<input id="chrk" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();" onFocus="this.select();">
+		<input id="chrk" type="number" inputmode="decimal" min=0 value=0.00>
 		<label for="chrk">Kn</label>
 	</fieldset>
 	<fieldset>
 		<legend>UPLATA</legend>
-		<input id="ueur" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();" onFocus="this.select();">
+		<input id="ueur" type="number" inputmode="decimal" min=0 value=0.00>
 		<label for="ueur">€</label>
 		&nbsp;
-		<input id="uhrk" type="number" inputmode="decimal" min=0 value=0.00 onClick="this.select();" onFocus="this.select();">
+		<input id="uhrk" type="number" inputmode="decimal" min=0 value=0.00>
 		<label for="uhrk">Kn</label>
 		<div>
 			<hr/>
@@ -132,7 +133,25 @@
 	document.querySelector('#phrk').addEventListener('input', e => hrk2eur(e, '#peur'));
 	document.querySelector('#peur').addEventListener('input', e => eur2hrk(e, '#phrk'));
 
-	let rate = 7.53450
+	let clipboard = 0.00;
+
+	function copy(self) {
+		clipboard = self.target.value;
+		self.target.value = '';
+	}
+
+	function paste(self) {
+		if (self.target.value === '') {
+			self.target.value = clipboard;
+		}
+	}
+
+	for (const selector of ['#chrk', '#ceur', '#uhrk', '#ueur']) {
+		document.querySelector(selector).addEventListener('click', e => copy(e));
+		document.querySelector(selector).addEventListener('blur', e => paste(e));
+	}
+
+	let rate = 7.53450;
 
 	function xchange(element, selector, rate) {
 		element.target.value.replace(',', '.');
