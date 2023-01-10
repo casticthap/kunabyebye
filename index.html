@@ -84,18 +84,18 @@
 	<form>
 		<fieldset>
 			<legend>CIJENA</legend>
-			<input id="ceur" type="number" inputmode="decimal" min=0 value=0.00>
+			<input id="ceur" type="text" inputmode="decimal" value=0.00>
 			<label for="ceur">€</label>
 			&nbsp;
-			<input id="chrk" type="number" inputmode="decimal" min=0 value=0.00>
+			<input id="chrk" type="text" inputmode="decimal" value=0.00>
 			<label for="chrk">Kn</label>
 		</fieldset>
 		<fieldset>
 			<legend>UPLATA</legend>
-			<input id="ueur" type="number" inputmode="decimal" min=0 value=0.00>
+			<input id="ueur" type="text" inputmode="decimal" value=0.00>
 			<label for="ueur">€</label>
 			&nbsp;
-			<input id="uhrk" type="number" inputmode="decimal" min=0 value=0.00>
+			<input id="uhrk" type="text" inputmode="decimal" value=0.00>
 			<label for="uhrk">Kn</label>
 			<div>
 				<hr/>
@@ -201,6 +201,22 @@
 		element.focus();
 		updatePovrat();
 	}
+
+	function filterInput(e) {
+		if(e.keyCode != 8 && ! /^\d*[.,]?\d{0,2}$/.test(this.value + e.key)) {
+			e.preventDefault();
+			return;
+		}
+		if(e.key === ',') {
+			e.preventDefault();
+			this.value += '.';
+		}
+	}
+
+	document.getElementById("ceur").addEventListener("keydown", filterInput)
+	document.getElementById("chrk").addEventListener("keydown", filterInput)
+	document.getElementById("ueur").addEventListener("keydown", filterInput)
+	document.getElementById("uhrk").addEventListener("keydown", filterInput)
 
 </script>
 </html>
