@@ -25,10 +25,10 @@
 			font-size: 24px;
 		}
 		input {
-			width: 41%;
+			width: 40%;
 			border-width: 1px;
 			text-align: right;
-			font-size: 64px;
+			font-size: 72px;
 			border-radius: 11px;
 			caret-color: transparent;
 		}
@@ -57,10 +57,9 @@
 		label { font-size: 64px; }
 		img.kovanica {
 			border-radius: 50%;
-			box-shadow:    2px 2px #818589;
 		}
 		img.novcanica {
-			box-shadow:    3px 3px #D3D3D3;
+			box-shadow:    2px 2px #D3D3D3;
 		}
 		.ponisti {
 			background:    #ff0000;
@@ -68,14 +67,14 @@
 			border:        1px solid #556699;
 			border-radius: 11px;
 			box-shadow:    2px 2px #444444;
-			padding:       20px 45px;
+			padding:       20px 10px;
 			color:         #ffffff;
 			display:       inline-block;
-			font:          normal bold 26px/1 "Open Sans", sans-serif;
+			font:          normal bold 24px/1 "Open Sans", sans-serif;
 			text-align:    center;
 			max-height: 50%;
 			align-self: top;
-			vertical-align: top;
+			vertical-align: bottom;
 		}
 	</style>
 </head>
@@ -101,23 +100,21 @@
 				<hr/>
 				<span>ili dodaj klikom na ikone:</span>
 				<div>
-					<img src="images/hrk100.avif" class="kovanica" onclick="javascript:add(1)" alt="jedna kuna"/>
-					<img src="images/hrk200.avif" class="kovanica" onclick="javascript:add(2)" alt="dvije kune"/>
-					<img src="images/hrk500.avif" class="kovanica" onclick="javascript:add(5)" alt="pet kuna"/>
-					<img src="images/hrk1000.avif" class="novcanica" onclick="javascript:add(10)" alt="deset kuna"/>
-					<img src="images/hrk2000.avif" class="novcanica" onclick="javascript:add(20)" alt="dvadeset kuna"/>
-					<img src="images/hrk5000.avif" class="novcanica" onclick="javascript:add(50)" alt="pedeset kuna"/>
-					<img src="images/hrk10000.avif" class="novcanica" onclick="javascript:add(100)" alt="sto kuna"/>
-					<img src="images/hrk20000.avif" class="novcanica" onclick="javascript:add(200)" alt="dvjesto kuna"/>
+					<img src="images/eur100.avif" class="kovanica" onclick="javascript:add(1)" alt="jedan euro"/>
+					<img src="images/eur200.avif" class="kovanica" onclick="javascript:add(2)" alt="dva eura"/>
+					<img src="images/eur500.avif" class="novcanica" onclick="javascript:add(5)" alt="pet eura"/>
+					<img src="images/eur1000.avif" class="novcanica" onclick="javascript:add(10)" alt="deset eura"/>
+					<img src="images/eur2000.avif" class="novcanica" onclick="javascript:add(20)" alt="dvadeset eura"/>
+					<img src="images/eur5000.avif" class="novcanica" onclick="javascript:add(50)" alt="pedeset eura"/>
 				</div>
 				<div>
-					<img src="images/hrk1.avif" class="kovanica" onclick="javascript:add(0.01)" alt="jedna lipa"/>
-					<img src="images/hrk2.avif" class="kovanica" onclick="javascript:add(0.02)" alt="dvije lipe"/>
-					<img src="images/hrk5.avif" class="kovanica" onclick="javascript:add(0.05)" alt="pet lipa"/>
-					<img src="images/hrk10.avif" class="kovanica" onclick="javascript:add(0.10)" alt="deset lipa"/>
-					<img src="images/hrk20.avif" class="kovanica" onclick="javascript:add(0.20)" alt="dvadeset lipa"/>
-					<img src="images/hrk50.avif" class="kovanica" onclick="javascript:add(0.50)" alt="pedeset lipa"/>
-					<div class="ponisti" onclick="javascript:setUplataHrk(0.00);">PONIŠTI UPLATU</div>
+					<img src="images/eur1.avif" class="kovanica" onclick="javascript:add(0.01)" alt="jedan euro cent"/>
+					<img src="images/eur2.avif" class="kovanica" onclick="javascript:add(0.02)" alt="dva euro centa"/>
+					<img src="images/eur5.avif" class="kovanica" onclick="javascript:add(0.05)" alt="pet euro centa"/>
+					<img src="images/eur10.avif" class="kovanica" onclick="javascript:add(0.10)" alt="deset euro centa"/>
+					<img src="images/eur20.avif" class="kovanica" onclick="javascript:add(0.20)" alt="dvadeset euro centa"/>
+					<img src="images/eur50.avif" class="kovanica" onclick="javascript:add(0.50)" alt="pedeset euro centa"/>
+					<div class="ponisti" onclick="javascript:setUplataEur(0.00);">PONIŠTI UPLATU</div>
 				</div>
 			</div>
 		</fieldset>
@@ -191,11 +188,11 @@
 	}
 
 	function add(value) {
-		setUplataHrk(parseFloat(document.querySelector('#uhrk').value) + parseFloat(value));
+		setUplataEur(parseFloat(document.querySelector('#ueur').value) + parseFloat(value));
 	}
 
-	function setUplataHrk(value) {
-		let element = document.querySelector('#uhrk');
+	function setUplataEur(value) {
+		let element = document.querySelector('#ueur');
 		element.value = value.toFixed(2);
 		element.dispatchEvent(new Event('input', {bubbles:true}));
 		element.focus();
