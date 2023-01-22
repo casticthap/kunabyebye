@@ -163,7 +163,16 @@
   </body>
   <script type="text/javascript">
 
+    const rate = 7.53450;
+
     const registerFormat = new RegExp('^0+[0-9]{0,9}\.[0-9]{0,2}$');
+
+    const sibling = { 
+      'ceur': 'chrk',
+      'chrk': 'ceur',
+      'ueur': 'uhrk',
+      'uhrk': 'ueur',
+    };
 
     let register;
     let activeInput;
@@ -215,29 +224,58 @@
     }
 
     function addValue(self) {
-      if (activeInput == 'chrk') { selectInput('ceur'); document.getElementById(activeInput).value = '0.00'; }
-      if (activeInput == 'uhrk') { selectInput('ueur'); document.getElementById(activeInput).value = '0.00'; }
+      selectSiblingIfHrk();
       value = parseFloat(self.target.dataset.value);
       input = document.getElementById(activeInput);
       input.value = (parseFloat(input.value) + value).toFixed(2);
-      register = input.value;
+      resetRegister(); // register = input.value;
       input.focus();
+      updateSibling();
+    }
+
+    function selectSiblingIfHrk() {
+      if (/^[cu]hrk$/.test(activeInput)) { 
+        selectInput(sibling[activeInput]);
+        document.getElementById(activeInput).value = '0.00';
+      }
     }
 
     function typeInput(key) {
       input = document.getElementById(activeInput);
-      if (key == 'C') { resetRegister(); key = ''; }
-      if (key == ',') { key = '.'; }
-      if (key == '.' && register.slice(-1) == '.') { key = ''; }
+      if (key === 'C') { resetRegister(); key = ''; }
+      if (key === ',') { key = '.'; }
+      if (key === '.' && register.slice(-1) === '.') { key = ''; }
 
       if (registerFormat.test(register + key)) {
         register += key;
       } else if (registerFormat.test(register.slice(0, -1) + key)) {
         register = register.slice(0, -1) + key;
       }
-      console.log(register);
       input.value = parseFloat(register).toFixed(2);
       input.focus();
+      updateSibling();
+    }
+
+    function updateSibling() {
+      input = document.getElementById(activeInput);
+      v = input.value;
+      s = document.getElementById(sibling[activeInput]);
+      r = /eur$/.test(activeInput) ? rate : 1/rate;
+      s.value = (v * r).toFixed(2);
+      updatePovrat();
+    }
+
+    function updatePovrat() {
+      updatePEur();
+      updatePHrk();
+    }
+    function updatePEur() { diff('ueur', 'ceur', 'peur'); }
+    function updatePHrk() { diff('uhrk', 'chrk', 'phrk'); }
+    function diff(uid, cid, pid) {
+      let num = document.getElementById(uid).value - document.getElementById(cid).value;
+      if (num < 0) { num = 0; }
+      num = num.toFixed(2);
+      document.getElementById(pid).value = num;
     }
 
     init();
