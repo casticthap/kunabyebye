@@ -2,6 +2,46 @@
 <html>
 <head>
   <style>
+    body {
+      font-family: Söhne,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Arial
+    }
+
+    /* Styling for the inputs */
+    fieldset {
+      display: flex-wrap;
+      flex-direction: row;
+      border-radius: 11px;
+      font-size: 24px;
+    }
+    input {
+      width: 40%;
+      border-width: 1px;
+      text-align: right;
+      font-size: 72px;
+      border-radius: 11px;
+      caret-color: transparent;
+    }
+    input:disabled {
+      background-color: white;
+      color: black;
+    }
+    input:focus {
+      background-color: #E9FFC9;
+    }
+    input::selection {
+      background-color: #C9E9FF;
+    }
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
     /* Styling for the buttons */
     .buttons {
       display: flex;
@@ -9,10 +49,13 @@
       width: 100%;
     }
     .button {
-      width: 33%;
-      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30vw;
+      height: 3em;
+      margin: 1vw;
       font-size: 2em;
-      text-align: center;
       border: 1px solid #ddd;
       background-color: #fafafa;
     }
@@ -42,23 +85,161 @@
     .button:active {
       background-color: #aaa;
     }
+
+    /* Styling for the bank-notes */
+    label { font-size: 64px; }
+
+    img.kovanica {
+      border-radius: 50%;
+    }
+    img.novcanica {
+      box-shadow:    2px 2px #D3D3D3;
+    }
   </style>
 </head>
 <body>
-  <div class="buttons">
-    <div class="button">1</div>
-    <div class="button">2</div>
-    <div class="button">3</div>
-    <div class="button">4</div>
-    <div class="button">5</div>
-    <div class="button">6</div>
-    <div class="button">7</div>
-    <div class="button">8</div>
-    <div class="button">9</div>
-    <div class="button">,</div>
-    <div class="button">0</div>
-    <div class="button c">C</div>
-  </div>
-</body>
-</html>
+  <fieldset>
+    <legend>CIJENA</legend>
+    <input id="ceur" type="number" inputmode="none" min=0 value=0.00 lang="en-US" tabindex="1" readonly>
+    <label for="ceur">€</label>
+    &nbsp;
+    <input id="chrk" type="number" inputmode="none" min=0 value=0.00 lang="en-US" tabindex="3" readonly>
+    <label for="chrk">Kn</label>
+  </fieldset>
 
+  <fieldset>
+    <legend>UPLATA</legend>
+    <input id="ueur" type="number" inputmode="none" min=0 value=0.00 lang="en-US" tabindex="2" readonly>
+    <label for="ueur">€</label>
+    &nbsp;
+    <input id="uhrk" type="number" inputmode="none" min=0 value=0.00 lang="en-US" tabindex="4" readonly>
+    <label for="uhrk">Kn</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>POVRAT</legend>
+    <input id="peur" type="number" value=0.00  lang="en-US" disabled>
+    <label for="peur">€</label>
+    &nbsp;
+    <input id="phrk" type="number" value=0.00  lang="en-US" disabled>
+    <label for="phrk">Kn</label>
+  </fieldset>
+
+  <div>
+    <hr/>
+    <div class="buttons">
+      <div class="button">1</div>
+      <div class="button">2</div>
+      <div class="button">3</div>
+      <div class="button">4</div>
+      <div class="button">5</div>
+      <div class="button">6</div>
+      <div class="button">7</div>
+      <div class="button">8</div>
+      <div class="button">9</div>
+      <div class="button">,</div>
+      <div class="button">0</div>
+      <div class="button c">C</div>
+    </div>
+
+    <span>ili dodaj vrijednost klikom na ikone:</span>
+    <div>
+      <img src="images/eur100.avif" class="kovanica" data-value="1"/>
+      <img src="images/eur200.avif" class="kovanica" data-value="2"/>
+      <img src="images/eur500.avif" class="novcanica" data-value="5"/>
+      <img src="images/eur1000.avif" class="novcanica" data-value="10"/>
+      <img src="images/eur2000.avif" class="novcanica" data-value="20"/>
+      <img src="images/eur5000.avif" class="novcanica" data-value="50"/>
+    </div>
+    <div>
+      <img src="images/eur1.avif" class="kovanica" data-value="0.01"/>
+      <img src="images/eur2.avif" class="kovanica" data-value="0.02"/>
+      <img src="images/eur5.avif" class="kovanica" data-value="0.05"/>
+      <img src="images/eur10.avif" class="kovanica" data-value="0.10"/>
+      <img src="images/eur20.avif" class="kovanica" data-value="0.20"/>
+      <img src="images/eur50.avif" class="kovanica" data-value="0.50"/>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+
+    const registerFormat = new RegExp('^0+[0-9]{0,9}\.[0-9]{0,2}$');
+
+    let register;
+    let activeInput;
+
+    function init() {
+      selectInput('ceur');
+      initOnInputClickSelectInput();
+      initOnButtonClickSelectKey();
+      initOnEuroClickAddValue();
+    }
+
+    function resetRegister() { register = '0'; }
+
+    function initOnInputClickSelectInput() {
+      let elements = document.getElementsByTagName('input');
+      for (let each of elements) {
+        each.addEventListener('click', selectThisInput);
+      }
+    }
+
+    function initOnButtonClickSelectKey() {
+      let elements = document.getElementsByClassName('button');
+      for (let each of elements) {
+        each.addEventListener('click', selectKey);
+      }
+    }
+
+    function initOnEuroClickAddValue() {
+      let elements = document.getElementsByTagName('img');
+      for (let each of elements) {
+        each.addEventListener('click', addValue);
+      }
+    }
+
+    function selectInput(inputId) {
+      activeInput = inputId;
+      resetRegister();
+      element = document.getElementById(activeInput);
+      element.focus();
+    }
+
+    function selectThisInput(self) {
+      selectInput(self.target.id);
+    }
+
+    function selectKey(self) {
+      let key = self.target.childNodes[0].nodeValue;
+      typeInput(key);
+    }
+
+    function addValue(self) {
+      if (activeInput == 'chrk') { selectInput('ceur'); document.getElementById(activeInput).value = '0.00'; }
+      if (activeInput == 'uhrk') { selectInput('ueur'); document.getElementById(activeInput).value = '0.00'; }
+      value = parseFloat(self.target.dataset.value);
+      input = document.getElementById(activeInput);
+      input.value = (parseFloat(input.value) + value).toFixed(2);
+      register = input.value;
+      input.focus();
+    }
+
+    function typeInput(key) {
+      input = document.getElementById(activeInput);
+      if (key == 'C') { resetRegister(); key = ''; }
+      if (key == ',') { key = '.'; }
+      if (key == '.' && register.slice(-1) == '.') { key = ''; }
+
+      if (registerFormat.test(register + key)) {
+        register += key;
+      } else if (registerFormat.test(register.slice(0, -1) + key)) {
+        register = register.slice(0, -1) + key;
+      }
+      console.log(register);
+      input.value = parseFloat(register).toFixed(2);
+      input.focus();
+    }
+
+    init();
+  </script>
+  </html>
