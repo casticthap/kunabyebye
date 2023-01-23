@@ -104,14 +104,13 @@
         font-size: 2.5em;
       }
     }
-
-    /* Add hover effect */
-    .button:hover {
-      background-color: #ddd;
-    }
     /* Add active effect */
     .button:active {
-      background-color: #aaa;
+      background-color: #ddd;
+    }
+    .button:focus {
+      outline: none;
+      box-shadow: none;
     }
 
     /* Styling for the bank-notes */
@@ -217,8 +216,8 @@
     function initOnInputClickSelectInput() {
       let elements = document.getElementsByTagName('input');
       for (let each of elements) {
-        each.addEventListener('click', selectThisInput);
-        each.addEventListener('focus', selectThisInput);
+        each.addEventListener('click', clickThisInput);
+        each.addEventListener('focus', focusThisInput);
       }
     }
 
@@ -253,9 +252,13 @@
 
     window.addEventListener('load', function () { lastSelectedInput = document.activeElement; })
 
-    function selectThisInput(self) {
-      if (self.type === 'focus' && lastSelectedInput === document.activeElement) return;
+    function focusThisInput(self) {
+      if (lastSelectedInput === document.activeElement) return;
       lastSelectedInput = document.activeElement;
+      clickThisInput(self);
+    }
+
+    function clickThisInput(self) {
       selectInput(self.target.id);
     }
 
