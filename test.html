@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
   <meta name="viewport" content="user-scalable=no">
   <title>KunaByeBye - Kuna/Euro Računalo</title>
@@ -60,23 +60,42 @@
       display: flex;
       flex-wrap: wrap;
       width: 100%;
+      background-color: #e8eaed;
     }
     .button {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 30vw;
-      margin: 1vw;
+      width: 31vw;
+      margin: 0.5vw;
       height: 2em;
       font-size: 3em;
       border: 1px solid #ddd;
-      background-color: #fafafa;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 2px #a9abad;
     }
+
     /* Styling for the "C" button */
     .button.c {
-      background-color: #f44336;
-      color: white;
+      background: linear-gradient(#dd2222, #dd3322);
+      border-radius: 10px;
+      color: #ffffff;
+      text-align: center;
+      position: relative;
+      background-image: linear-gradient(red,orangered);
+      box-shadow: 0px 2px #cc0000;
     }
+    .button.c:after{
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: calc(100% - 4px);
+      height: 50%;
+      background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+    }
+
     /* Media query for mobile devices */
     @media (max-width: 768px) {
       .button {
@@ -84,10 +103,6 @@
         height: 75px;
         font-size: 2.5em;
       }
-    }
-    /* Add Rounded corners */
-    .button {
-      border-radius: 10px;
     }
 
     /* Add hover effect */
@@ -222,7 +237,9 @@
     }
 
     function initOnGlobalKeyPressTypeInput() {
-      document.addEventListener('keypress', e => typeInput(String.fromCharCode(e.which)));
+      document.addEventListener('keypress',
+        e => typeInput(String.fromCharCode(e.which).toUpperCase())
+        );
     }
 
     function selectInput(inputId) {
