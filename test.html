@@ -280,7 +280,6 @@
     function selectSiblingIfHrk() {
       if (/^[cu]hrk$/.test(activeInput)) { 
         selectInput(sibling[activeInput]);
-        document.getElementById(activeInput).value = '0.00';
       }
     }
 
