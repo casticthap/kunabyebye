@@ -249,7 +249,13 @@
       element.focus();
     }
 
+    let lastSelectedInput = null;
+
+    window.addEventListener('load', function () { lastSelectedInput = document.activeElement; })
+
     function selectThisInput(self) {
+      if (lastSelectedInput === document.activeElement) return;
+      lastSelectedInput = document.activeElement;
       selectInput(self.target.id);
     }
 
