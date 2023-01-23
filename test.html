@@ -194,6 +194,7 @@
       initOnInputClickSelectInput();
       initOnButtonClickSelectKey();
       initOnEuroClickAddValue();
+      initOnGlobalKeyPressTypeInput();
     }
 
     function resetRegister() { register = '0'; }
@@ -202,6 +203,7 @@
       let elements = document.getElementsByTagName('input');
       for (let each of elements) {
         each.addEventListener('click', selectThisInput);
+        each.addEventListener('focus', selectThisInput);
       }
     }
 
@@ -217,6 +219,10 @@
       for (let each of elements) {
         each.addEventListener('click', addValue);
       }
+    }
+
+    function initOnGlobalKeyPressTypeInput() {
+      document.addEventListener('keypress', e => typeInput(String.fromCharCode(e.which)));
     }
 
     function selectInput(inputId) {
