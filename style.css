@@ -23,7 +23,9 @@ input:disabled {
 }
 input:focus {
   background-color: #E9FFC9;
-  animation: 0.05s linear 5 alternate running fade-out;
+}
+.flash {
+  animation: 0.05s linear 5 alternate running fade-out;  
 }
 input::selection {
   background-color: #C9E9FF;

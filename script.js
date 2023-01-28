@@ -58,9 +58,14 @@ function initOnGlobalKeyPressTypeInput() {
 }
 
 function selectInput(inputId) {
+  if (activeInput != null) {
+    let previous = document.getElementById(activeInput);
+    previous.classList.remove('flash');
+  }
   activeInput = inputId;
   resetRegister();
-  element = document.getElementById(activeInput);
+  let element = document.getElementById(activeInput);
+  element.classList.add('flash');
   element.focus();
 }
 
