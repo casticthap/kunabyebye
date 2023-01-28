@@ -58,14 +58,9 @@ function initOnGlobalKeyPressTypeInput() {
 }
 
 function selectInput(inputId) {
-  if (activeInput != null) {
-    let previous = document.getElementById(activeInput);
-    previous.classList.remove('flash');
-  }
   activeInput = inputId;
   resetRegister();
   let element = document.getElementById(activeInput);
-  element.classList.add('flash');
   element.focus();
 }
 
@@ -73,7 +68,6 @@ let lastSelectedInput = null;
 
 window.addEventListener('load', function () { 
   lastSelectedInput = document.activeElement;
-  // document.getElementById('ceur').click();
   selectInput('ceur');
 });
 
@@ -105,7 +99,16 @@ function addValue(self) {
 function selectSiblingIfHrk() {
   if (/^[cu]hrk$/.test(activeInput)) { 
     selectInput(sibling[activeInput]);
+    flash(activeInput);
   }
+}
+
+function flash(id) {
+  // https://stackoverflow.com/a/63561659
+  let element = document.getElementById(id);
+  element.classList.remove('flash');
+  void element.offsetWidth;
+  element.classList.add('flash');
 }
 
 function selectNextInput() {
